@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deathmatch", "Deathmatch.csproj", "{4E3AD83E-466D-82D9-A7B5-901E835E2AAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deathmatch.Plugins", "Deathmatch.Plugins.csproj", "{C3D7CFB3-8941-E59C-60C4-ACC86EE6AA9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deathmatch.Editor.Plugins", "Deathmatch.Editor.Plugins.csproj", "{07301057-81A9-EEFB-4607-00F2F5361290}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E3AD83E-466D-82D9-A7B5-901E835E2AAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E3AD83E-466D-82D9-A7B5-901E835E2AAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E3AD83E-466D-82D9-A7B5-901E835E2AAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E3AD83E-466D-82D9-A7B5-901E835E2AAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3D7CFB3-8941-E59C-60C4-ACC86EE6AA9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3D7CFB3-8941-E59C-60C4-ACC86EE6AA9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3D7CFB3-8941-E59C-60C4-ACC86EE6AA9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3D7CFB3-8941-E59C-60C4-ACC86EE6AA9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07301057-81A9-EEFB-4607-00F2F5361290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07301057-81A9-EEFB-4607-00F2F5361290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07301057-81A9-EEFB-4607-00F2F5361290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07301057-81A9-EEFB-4607-00F2F5361290}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
