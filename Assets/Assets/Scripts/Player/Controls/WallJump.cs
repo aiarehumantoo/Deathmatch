@@ -10,7 +10,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         FirstPersonController firstPersonController;                                                    // Script.
         private CharacterController m_CharacterController;
 
-        bool notWallJumped = true;
+        bool wallJumped = true;
         bool touchingWall = false;
 
 
@@ -20,24 +20,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_CharacterController = GetComponent<CharacterController>();
         }
 
-        void Start()
-        {
-            // happens after awake?
-        }
-
         void Update()
         {
-            // WallJump. On air, touching wall, hasnt walljumped yet.
-            if (Input.GetButtonDown("Jump") && !m_CharacterController.isGrounded && touchingWall && notWallJumped)
+            // WallJump. On air, touching wall, hasnt done walljump yet.
+            if (Input.GetButtonDown("Jump") && !m_CharacterController.isGrounded && touchingWall && wallJumped)
             {
                 firstPersonController.m_WallJump = true;
-                notWallJumped = false;
+                wallJumped = false;
             }
 
             // Reset walljump after landing
             if (m_CharacterController.isGrounded)
             {
-                notWallJumped = true;
+                wallJumped = true;
             }
         }
 

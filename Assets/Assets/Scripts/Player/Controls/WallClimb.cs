@@ -18,7 +18,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_CharacterController = GetComponent<CharacterController>();
         }
 
-        // Touching wall, hold space to climb, height limit.
+        // Touching wall, hold space to climb.                                      TODO; height limit.
         void Update()
         {
             if (Input.GetButton("Jump") && touchingWall)

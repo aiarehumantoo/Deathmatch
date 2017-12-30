@@ -6,6 +6,7 @@ namespace Enemy
 {
     public class EnemyKilled : MonoBehaviour
     {
+        // Respawn enemy when killed
         void OnDestroy()
         {
             //print("Script was destroyed");

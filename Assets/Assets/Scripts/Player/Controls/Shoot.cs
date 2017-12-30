@@ -143,7 +143,7 @@ namespace DeathMatch
 
         void CycleWeapons()
         {
-            //TODO; make into cycle through list of weapons.config file for weapons ?
+            //TODO; make into cycle through list of weapons. Config file for weapons ?
             if (fireMode == 0)
             {
                 //LG

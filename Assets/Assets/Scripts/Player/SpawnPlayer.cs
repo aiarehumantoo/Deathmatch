@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnPlayer : MonoBehaviour
+namespace Player
 {
-    public GameObject player;
-
-	void Start ()
+    public class SpawnPlayer : MonoBehaviour
     {
-        Instantiate(player, transform.position, Quaternion.identity);
+        public GameObject player;
+
+        //Spawn player. TODO; respawn system.
+        void Start()
+        {
+            Instantiate(player, transform.position, Quaternion.identity);
+        }
     }
 }

@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 114096605578518758}
   - component: {fileID: 114428389703033268}
   - component: {fileID: 136123102838443116}
-  - component: {fileID: 114988570515260778}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -79,7 +78,6 @@ GameObject:
   - component: {fileID: 81934049799447414}
   - component: {fileID: 124220761711580180}
   - component: {fileID: 114815542396124270}
-  - component: {fileID: 114062612193453500}
   m_Layer: 0
   m_Name: FirstPersonCharacter
   m_TagString: MainCamera
@@ -250,6 +248,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 0
   m_AllowMSAA: 0
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -574,20 +573,6 @@ MonoBehaviour:
   m_Jump: 0
   m_WallJump: 0
   m_WallClimb: 0
---- !u!114 &114062612193453500
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1775833711913090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ccba09a04d72994083a083a73719abd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  smooth: 2
-  tiltAngle: 30
-  m_Camera: {fileID: 0}
 --- !u!114 &114096605578518758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -634,18 +619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ff7fb85f37eb64bb31c49040003dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: 300
---- !u!114 &114988570515260778
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1055271509615794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e15ca702d915394cabe18a52edac0fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  target: 141
 --- !u!120 &120300994604092850
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -803,7 +777,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1775833711913090}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.79999924, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4304640203999630}

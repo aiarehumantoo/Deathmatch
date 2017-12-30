@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Double jump speed for short duration after jumping.
+// Increase jump speed for short duration after jumping.
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
     public class DoubleJump : MonoBehaviour
     {
         float timer;                                    // Timer.
-        float doubleJumpWindow = 0.6f;                  // How long player has time to do higher jump after jumping once. Must be less than normal jump takes.
+        float doubleJumpWindow = 0.6f;                  // How long player has time to do higher jump after jumping once. Must be less than what normal jump takes.
         float defaultJumpSpeed;                         // Default value.
+        float doubleJumpSpeed = 15;
         bool doubleJump = false;
 
         FirstPersonController firstPersonController;    // Script.
@@ -32,13 +33,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 timer = 0f;                                                                             // Reset the timer.
                 doubleJump = true;                                                                      // Active
-                //firstPersonController.m_JumpSpeed = firstPersonController.m_JumpSpeed*2;                // Double jump speed.
             }
 
             // DoubleJump active and player on the ground again + some time has passed so that first jump does not count.
             if (doubleJump == true && m_CharacterController.isGrounded && timer >= 0.05)
             {
-                firstPersonController.m_JumpSpeed = 15;                                                                                       // Default is 10. Setting to 20 instead of *2 coz this is done each update. CHANGE THIS TO BE DONE ONCE PER JUMP.
+                firstPersonController.m_JumpSpeed = doubleJumpSpeed;                                    // Increase jump speed.
             }
 
             // Disable DoubleJump after expiring.

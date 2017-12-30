@@ -18,6 +18,7 @@ namespace Enemy
             StartCoroutine(SpawnEnemy2());
         }
 
+        // Respawn enemy with delay
         IEnumerator SpawnEnemy2()
         {
             yield return new WaitForSeconds(1);

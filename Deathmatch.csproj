@@ -302,10 +302,10 @@
     <Compile Include="Assets\Assets\Scripts\Player\Controls\Shoot.cs" />
     <Compile Include="Assets\Assets\Scripts\Player\Controls\WallClimb.cs" />
     <Compile Include="Assets\Assets\Scripts\Player\Controls\WallJump.cs" />
+    <Compile Include="Assets\Assets\Scripts\Player\CPMA.cs" />
     <Compile Include="Assets\Assets\Scripts\Player\SpawnPlayer.cs" />
     <Compile Include="Assets\Assets\Scripts\Settings.cs" />
     <Compile Include="Assets\Assets\Scripts\SimpleMove.cs" />
-    <Compile Include="Assets\Assets\Scripts\TextureScaler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Mini Profiler\CHANGELOG.txt" />
