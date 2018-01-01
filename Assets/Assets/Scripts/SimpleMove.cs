@@ -16,11 +16,13 @@ public class SimpleMove : MonoBehaviour
         // Move left/right
         if (moveLeft)
         {
-            transform.Translate(Vector3.left * Time.deltaTime*5);
+            //transform.Translate(Vector3.left * Time.deltaTime*5);
+            transform.Translate(Vector3.forward * Time.deltaTime * 5);
         }
         else
         {
-            transform.Translate(Vector3.right * Time.deltaTime*5);
+            //transform.Translate(Vector3.right * Time.deltaTime*5);
+            transform.Translate(Vector3.back * Time.deltaTime * 5);
         }
         
         // Toggle direction every 2 seconds
