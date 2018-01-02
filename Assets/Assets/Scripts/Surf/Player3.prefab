@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 136609794269696442}
   - component: {fileID: 114909986767019600}
   - component: {fileID: 114823546402007100}
+  - component: {fileID: 114137189401064492}
   m_Layer: 0
   m_Name: Player3
   m_TagString: Player
@@ -276,6 +277,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114137189401064492
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1897877457293734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0e31f94ae430eb4186dc29d85e05cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerView: {fileID: 224573557957595872}
+  playerViewYOffset: 0.6
+  xMouseSensitivity: 30
+  yMouseSensitivity: 30
 --- !u!114 &114682712461306126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -294,7 +310,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1897877457293734}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac37b2ab78c4dbd4f9816a2889f6d5dc, type: 3}
   m_Name: 

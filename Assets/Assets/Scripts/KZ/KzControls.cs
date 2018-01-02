@@ -26,6 +26,9 @@ public class KzControls : MonoBehaviour
     // Used to display real time friction values
     private float playerFriction = 0.0f;
 
+    bool surf = false;      // Surf controls
+    bool ladder = false;    // Ladder
+
     // Player commands
     private Inputs _inputs;
 
@@ -134,13 +137,22 @@ public class KzControls : MonoBehaviour
             timer += Time.deltaTime;
         }
 
-        if (_controller.isGrounded)
+        if (surf)
         {
-            GroundMove();
-        }
-        else if (!_controller.isGrounded)
-        {
+            // Air controls + 0 gravity for now. Make surf controls later
+            //SurfMove();
             AirMove();
+        }
+        else
+        {
+            if (_controller.isGrounded)
+            {
+                GroundMove();
+            }
+            else if (!_controller.isGrounded)
+            {
+                AirMove();
+            }
         }
 
         // Move the controller
@@ -170,6 +182,16 @@ public class KzControls : MonoBehaviour
         {
             wishJump = false;
         }
+    }
+
+    private void LadderMove()
+    {
+        /*
+         * CSS ladder physics
+         * W/S go up/down instead. Depends on camera. ie. looking up --> W is up, S is down.
+         * A/D left/right along the ladder
+         * Sideways towards the ladder goes up. Opposite direction goes down
+         */
     }
 
     private void GroundMove()
@@ -255,8 +277,18 @@ public class KzControls : MonoBehaviour
             AirControl(wishdir, wishspeed2);
         // !CPM: Aircontrol
 
-        // Apply gravity
-        playerVelocity.y -= gravity * Time.deltaTime;
+
+        // Check if surfing is enabled. Not needed once surf controls are done
+        if (!surf)
+        {
+            // Apply gravity
+            playerVelocity.y -= gravity * Time.deltaTime;
+        }
+        else
+        {
+            // Reset the gravity velocity
+            playerVelocity.y = 0;
+        }
     }
 
     private void AirControl(Vector3 wishdir, float wishspeed)
@@ -359,5 +391,32 @@ public class KzControls : MonoBehaviour
         scale = moveSpeed * max / (moveScale * total);
 
         return scale;
+    }
+
+
+
+
+
+
+
+
+    // Enable/disable surfing
+    void OnTriggerEnter(Collider collider)
+    {
+        //Debug.Log("Test");
+        if (collider.tag == "Surf")
+        {
+            //Debug.Log("Test");
+            surf = true;
+        }
+
+    }
+    void OnTriggerExit(Collider collider)
+    {
+        if (collider.tag == "Surf")
+        {
+            surf = false;
+        }
+
     }
 }

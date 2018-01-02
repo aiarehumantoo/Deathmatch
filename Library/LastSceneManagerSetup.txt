@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Assets/Surf.unity
+- path: Assets/Assets/test.unity
   isLoaded: 1
   isActive: 1

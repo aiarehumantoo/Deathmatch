@@ -147,17 +147,31 @@ public class SurfControls : MonoBehaviour
     private void SurfMove()
     {
         // Surf controls. Sliding + gravity + ramp = vertical speed --> horizontal speed.
+        // Similar to air controls. !direction (backwards. or forward after turning 180) reduces speed, control with a/d + mouse
+        //controls slightly adjust speed / direction
+
+        // Normal aircontrols with 0 gravity is otherwise ok but bit bouncy. (see KzControls.cs)
+        // Make smoother, increase speed?
+        // Sliding down the surf ramp without user input
+        // Gaining speed when going downwards
+        // Losing speed when going upwards
 
 
+
+        // Apply gravity
+        //playerVelocity.y -= gravity * Time.deltaTime;
+        playerVelocity.y = 0;
     }
 
     private void GroundMove()
     {
+        //Circle jump; W = x ups, W+A/D = 2x ups.
+
 
         //Simple ground movement for testing
-        playerVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        playerVelocity = transform.TransformDirection(playerVelocity);
-        playerVelocity *= moveSpeed;
+        playerVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));        //input
+        playerVelocity = transform.TransformDirection(playerVelocity);                                  //direction
+        playerVelocity *= moveSpeed;                                                                    //speed multiplier
         //playerVelocity.y -= gravity * Time.deltaTime;
 
 
