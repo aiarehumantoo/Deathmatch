@@ -137,11 +137,17 @@ public class KzControls : MonoBehaviour
             timer += Time.deltaTime;
         }
 
+
+        // Messy. FIX
         if (surf)
         {
             // Air controls + 0 gravity for now. Make surf controls later
             //SurfMove();
             AirMove();
+        }
+        else if (ladder)
+        {
+            LadderMove();
         }
         else
         {
@@ -192,6 +198,10 @@ public class KzControls : MonoBehaviour
          * A/D left/right along the ladder
          * Sideways towards the ladder goes up. Opposite direction goes down
          */
+
+        playerVelocity.x = 0;
+        playerVelocity.z = 0;
+        playerVelocity.y = Input.GetAxisRaw("Vertical") * 10;
     }
 
     private void GroundMove()
@@ -400,7 +410,7 @@ public class KzControls : MonoBehaviour
 
 
 
-    // Enable/disable surfing
+    // Enable/disable surfing                       TODO; top surface only
     void OnTriggerEnter(Collider collider)
     {
         //Debug.Log("Test");
@@ -410,12 +420,22 @@ public class KzControls : MonoBehaviour
             surf = true;
         }
 
+        if(collider.tag == "Ladder")
+        {
+            ladder = true;
+        }
+
     }
     void OnTriggerExit(Collider collider)
     {
         if (collider.tag == "Surf")
         {
             surf = false;
+        }
+
+        if (collider.tag == "Ladder")
+        {
+            ladder = false;
         }
 
     }
