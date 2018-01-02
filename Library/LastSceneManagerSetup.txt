@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Assets/kz.unity
+- path: Assets/Assets/Surf.unity
   isLoaded: 1
   isActive: 1
