@@ -299,6 +299,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0e31f94ae430eb4186dc29d85e05cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_PlaySounds: []
+  m_JumpSounds:
+  - {fileID: 8300000, guid: 89bc44e9db1c0b74bae81381fd532d91, type: 3}
+  - {fileID: 8300000, guid: a020efa3d6fac5f42901dfba604ab1b1, type: 3}
+  - {fileID: 8300000, guid: a8dd5c213c5c39c48ba68a8bfe852030, type: 3}
+  - {fileID: 8300000, guid: d43b6cb855716974586c19b7a42af3ab, type: 3}
+  m_LandingSounds: []
+  m_FootStepSounds: []
   playerView: {fileID: 224412658982817448}
   playerViewYOffset: 0.6
   xMouseSensitivity: 30

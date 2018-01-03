@@ -29,6 +29,15 @@ public class KzControls : MonoBehaviour
     bool surf = false;      // Surf controls
     bool ladder = false;    // Ladder
 
+    // An array of sounds that will be randomly selected from
+    public AudioClip[] m_PlaySounds;        // Used to play sounds
+    public AudioClip[] m_JumpSounds;
+    public AudioClip[] m_LandingSounds;
+    public AudioClip[] m_FootStepSounds;
+    private AudioSource m_AudioSource;
+    float audioTimer;       //Timer for footsteps
+    float timeBetweenFootSteps = 0.3f;
+
     // Player commands
     private Inputs _inputs;
 
@@ -64,8 +73,10 @@ public class KzControls : MonoBehaviour
     float airControl = 0.3f;               // How precise air control is
     float sideStrafeAcceleration = 100.0f;  // How fast acceleration occurs to get up to sideStrafeSpeed when
     float sideStrafeSpeed = 1.0f;          // What the max speed to generate when side strafing
-    float jumpSpeed = 8.0f;                // The speed at which the character's up axis gains when hitting jump
+    float jumpSpeed = 7.0f;                // The speed at which the character's up axis gains when hitting jump
     float moveScale = 1.0f;
+
+    bool m_PreviouslyGrounded = true;
 
     //**********************************************************************
     #endregion
@@ -92,8 +103,10 @@ public class KzControls : MonoBehaviour
         // Put the camera inside the capsule collider
         playerView.position = new Vector3(transform.position.x, transform.position.y + playerViewYOffset, transform.position.z);
 
-        // Controller reference
+        m_AudioSource = GetComponent<AudioSource>();
         _controller = GetComponent<CharacterController>();
+
+        Settings();
     }
 
     private void Update()
@@ -137,11 +150,23 @@ public class KzControls : MonoBehaviour
             timer += Time.deltaTime;
         }
 
+        if (audioTimer < timeBetweenFootSteps)
+        {
+            audioTimer += Time.deltaTime;
+        }
+
+
+        // Enable landing sound when falling velocity exceeds 4ups
+        if (_controller.velocity.y <= -4 && m_PreviouslyGrounded)
+        {
+            //Debug.Log("landing sound enabled");
+            m_PreviouslyGrounded = false;
+        }
 
         // Messy. FIX
         if (surf)
         {
-            // Air controls + 0 gravity for now. Make surf controls later
+            // Air controls + 0 gravity for now. Make proper surf controls later
             //SurfMove();
             AirMove();
         }
@@ -154,11 +179,26 @@ public class KzControls : MonoBehaviour
             if (_controller.isGrounded)
             {
                 GroundMove();
+
+                // Current code resets vertical velocity when player touches the ground. So its like ground --> air --> ground cycle, results in audio spam. FIX            Either change how gravity works or require set amount of air time before landing sound can be triggered
+                // Landing
+                if(!m_PreviouslyGrounded)
+                {
+                    m_PreviouslyGrounded = true;
+                    PlayLandingSound();
+                    //Debug.Log("landing sound disabled");
+                }
+                else if((playerVelocity.x != 0 || playerVelocity.z != 0) && audioTimer >= timeBetweenFootSteps)     // Quick & dirty check if player is moving + delay between sounds
+                {
+                    audioTimer = 0f;
+                    PlayFootStepAudio();
+                }
             }
             else if (!_controller.isGrounded)
             {
+                //m_PreviouslyGrounded = false;
                 AirMove();
-            }
+            }  
         }
 
         // Move the controller
@@ -227,7 +267,7 @@ public class KzControls : MonoBehaviour
         Accelerate(wishdir, wishspeed, runAcceleration);
 
         // Reset the gravity velocity
-        playerVelocity.y = 0;
+        playerVelocity.y = 0f;
 
         if (wishJump)
         {
@@ -244,6 +284,7 @@ public class KzControls : MonoBehaviour
                 playerVelocity.y = jumpSpeed;
             }
 
+            PlayJumpSound();
             wishJump = false;
         }
     }
@@ -404,6 +445,61 @@ public class KzControls : MonoBehaviour
     }
 
 
+
+    public void Settings()
+    {
+        //Read & copy settings file OnStart + when closing menu
+    }
+
+
+    #region Sounds
+    //Player sounds
+    //**********************************************************************
+
+    // Change audio + play sound
+
+    private void PlayJumpSound()
+    {
+        //Debug.Log("jump sound");
+        m_PlaySounds = m_JumpSounds;
+        PlayRandomAudio();
+    }
+
+    private void PlayLandingSound()
+    {
+        //Debug.Log("landing sound");
+        //m_PlaySounds = m_LandingSounds;       // no unique landing sounds yet
+        m_PlaySounds = m_JumpSounds;
+        PlayRandomAudio();
+    }
+
+    private void PlayFootStepAudio()
+    {
+        //Debug.Log("footstep sound");
+        m_PlaySounds = m_JumpSounds;
+        //m_PlaySounds = m_FootStepSounds;      // no unique footstep sounds yet
+        PlayRandomAudio();
+    }
+
+    private void PlayLadderAudio()
+    {
+
+    }
+
+    private void PlayRandomAudio()
+    {
+        // pick & play a random jump sound from the array,
+        // excluding sound at index 0
+        int n = Random.Range(1, m_PlaySounds.Length);
+        m_AudioSource.clip = m_PlaySounds[n];
+        m_AudioSource.PlayOneShot(m_AudioSource.clip);
+        // move picked sound to index 0 so it's not picked next time
+        m_PlaySounds[n] = m_PlaySounds[0];
+        m_PlaySounds[0] = m_AudioSource.clip;
+    }
+
+    //**********************************************************************
+    #endregion
 
 
 

@@ -24,9 +24,10 @@ public class Debugger : MonoBehaviour
         GUI.Label(new Rect(0, 100, 400, 100), "Speed: " + Mathf.Round(ups.magnitude * 100) / 100 + "ups", style);
         
         var ups2 = _controller.velocity;
-        ups2.x = 0;
-        ups2.z = 0;
-        GUI.Label(new Rect(0, 120, 400, 100), "Vertical Speed: " + Mathf.Round(ups2.magnitude * 100) / 100 + "ups", style);
+        //ups2.x = 0;
+        //ups2.z = 0;
+        //GUI.Label(new Rect(0, 120, 400, 100), "Vertical Speed: " + Mathf.Round(ups2.magnitude * 100) / 100 + "ups", style);
+        GUI.Label(new Rect(0, 120, 400, 100), "Vertical Speed: " + ups2.y + "ups", style);
     }
 
     void OnTriggerEnter(Collider collider)
