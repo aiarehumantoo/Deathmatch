@@ -188,7 +188,7 @@ public class KzControls : MonoBehaviour
                     PlayLandingSound();
                     //Debug.Log("landing sound disabled");
                 }
-                else if((playerVelocity.x != 0 || playerVelocity.z != 0) && audioTimer >= timeBetweenFootSteps)     // Quick & dirty check if player is moving + delay between sounds
+                else if((playerVelocity.x >= 1 || playerVelocity.z >= 1) && audioTimer >= timeBetweenFootSteps)     // Quick & dirty check if player is moving + delay between sounds
                 {
                     audioTimer = 0f;
                     PlayFootStepAudio();
@@ -234,14 +234,22 @@ public class KzControls : MonoBehaviour
     {
         /*
          * CSS ladder physics
-         * W/S go up/down instead. Depends on camera. ie. looking up --> W is up, S is down.
-         * A/D left/right along the ladder
-         * Sideways towards the ladder goes up. Opposite direction goes down
+         * Direction player moves on the ladder depends on where camera is facing
+         * speeds add up. ie. S+D while looking downwards away from ladder results in player climbing the ladder twice as fast
+         * 
          */
 
+        //
         playerVelocity.x = 0;
         playerVelocity.z = 0;
         playerVelocity.y = Input.GetAxisRaw("Vertical") * 10;
+    }
+
+    private void SurfMove()
+    {
+        //gravity + air control + slide
+        //forward velocity -= velocity.y. Convert vertical velocity into forward acceleration. Down for accel, up for deaccel.
+        //Enable surfing only on correct faces. Simple touch check is not enough.
     }
 
     private void GroundMove()
@@ -329,7 +337,7 @@ public class KzControls : MonoBehaviour
         // !CPM: Aircontrol
 
 
-        // Check if surfing is enabled. Not needed once surf controls are done
+        // Check if surfing is enabled. Not needed once proper surf controls are done
         if (!surf)
         {
             // Apply gravity
