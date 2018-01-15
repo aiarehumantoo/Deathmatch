@@ -42,8 +42,6 @@ public class KzControls : MonoBehaviour
     private Inputs _inputs;
 
     #region MouseControls
-    //Mouse controls
-    //**********************************************************************
 
     //Camera
     public Transform playerView;
@@ -58,12 +56,10 @@ public class KzControls : MonoBehaviour
     private Vector3 playerVelocity = Vector3.zero;
     private float playerTopVelocity = 0.0f;
 
-    //**********************************************************************
     #endregion
 
     #region MovementVariables
     //Variables for movement
-    //**********************************************************************
 
     float moveSpeed = 7.0f;                // Ground move speed
     float runAcceleration = 10.0f;         // Ground accel
@@ -78,7 +74,6 @@ public class KzControls : MonoBehaviour
 
     bool m_PreviouslyGrounded = true;
 
-    //**********************************************************************
     #endregion
 
     #region DoubleJumpVariables
@@ -112,8 +107,6 @@ public class KzControls : MonoBehaviour
     private void Update()
     {
         #region MouseControls
-        //Mouse controls
-        //**********************************************************************
 
         /* Ensure that the cursor is locked into the screen */
         if (Cursor.lockState != CursorLockMode.Locked)
@@ -135,12 +128,9 @@ public class KzControls : MonoBehaviour
         this.transform.rotation = Quaternion.Euler(0, rotY, 0); // Rotates the collider
         playerView.rotation = Quaternion.Euler(rotX, rotY, 0); // Rotates the camera
 
-        //**********************************************************************
         #endregion
 
         #region Movement
-        //Player Movement
-        //**********************************************************************
 
         QueueJump();
 
@@ -208,7 +198,6 @@ public class KzControls : MonoBehaviour
         // Set the camera's position to the transform
         playerView.position = new Vector3(transform.position.x, transform.position.y + playerViewYOffset, transform.position.z);
 
-        //**********************************************************************
         #endregion  
     }
 
@@ -254,6 +243,8 @@ public class KzControls : MonoBehaviour
 
     private void GroundMove()
     {
+        //TODO; remake for snappier controls.
+
         Vector3 wishdir;
 
         // Do not apply friction if the player is queueing up the next jump
@@ -461,8 +452,6 @@ public class KzControls : MonoBehaviour
 
 
     #region Sounds
-    //Player sounds
-    //**********************************************************************
 
     // Change audio + play sound
 
@@ -506,7 +495,6 @@ public class KzControls : MonoBehaviour
         m_PlaySounds[0] = m_AudioSource.clip;
     }
 
-    //**********************************************************************
     #endregion
 
 
