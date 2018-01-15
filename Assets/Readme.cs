@@ -1,6 +1,6 @@
 ﻿/* README
  * 
- * Movement mechanics somewhat explained;
+ * Movement mechanics somewhat explained. For more detailed explanation search for Quake / Counter-Strike / Team Fortress 2 tutorials. Keywords; Bhop, Strafejumping, air strafing, surfing.
  * Used in kz, surf and sandbox scenes. Runner scene is simpler movement with some extras, similar to something like Mirrors edge.
  * 
  * 
