@@ -228,10 +228,35 @@ public class KzControls : MonoBehaviour
          * 
          */
 
-        //
-        playerVelocity.x = 0;
+        //testing
+        playerVelocity.x = Input.GetAxisRaw("Horizontal") * 10;
         playerVelocity.z = 0;
         playerVelocity.y = Input.GetAxisRaw("Vertical") * 10;
+
+        //Check if player is facing the ladder. >90 degrees away == !facingLadder
+        //Get correct ladder from collision check?
+        //Camera angle?
+        //Raycast likely wouldnt work that well unless player is required to directly look at the ladder? Not really desired result
+        bool facingLadder = false;
+
+        //??? Was W/S movement restricted only to vertical? It might have been just dependant on camera angle --> check / test what works out better
+
+        //Reverse vertical movement when facing away from ladder
+        if (facingLadder)
+        {
+            //playerVelocity.y = Input.GetAxisRaw("Vertical") * 10;
+        }
+        else
+        {
+            //playerVelocity.y = Input.GetAxisRaw("Vertical") * -10;
+        }
+
+        // A/D movement angle depends on camera. ie. when facing ladder, player will move left / right accordingly. When facing 90 degrees to the left A/D movement will be down/up instead.
+        // Think of it as 2d sideview. A/D movement is Y rotation of camera +- 90 degrees.
+
+
+
+        // Other option would be to make it similar to ground movement, but instead of Z axis, player would be able to move along Y axis. (unable to move away or towards the ladder, but able to go up / down instead)
     }
 
     private void SurfMove()
