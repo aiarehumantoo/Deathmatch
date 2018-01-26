@@ -17,7 +17,8 @@ struct Inputs
 
 public class KzControls : MonoBehaviour
 {
-    public Transform currentLadder;
+    public Transform angletest;
+    Transform currentLadder;
 
     float gravity = 20.0f;      // Gravity
     float friction = 6;         // Ground friction
@@ -201,6 +202,13 @@ public class KzControls : MonoBehaviour
         playerView.position = new Vector3(transform.position.x, transform.position.y + playerViewYOffset, transform.position.z);
 
         #endregion  
+
+        //testing
+        //returns smaller angle between objects
+        Vector3 targetDir = angletest.position - transform.position;
+        float angle = Vector3.Angle(targetDir, transform.forward);
+
+        print(angle);   // 0-180?
     }
 
     private void SetMovementDir()
@@ -253,10 +261,10 @@ public class KzControls : MonoBehaviour
         // X-axis. directly front = 0, Directly behind 180.
 
 
-        Vector3 targetDir = currentLadder.position - transform.position;
-        float angle = Vector3.Angle(targetDir, transform.forward);
+        //Vector3 targetDir = currentLadder.position - transform.position;
+        //float angle = Vector3.Angle(targetDir, transform.forward);
 
-        print(angle);
+        //print(angle);   // 0-180?
 
 
 
