@@ -17,6 +17,8 @@ struct Inputs
 
 public class KzControls : MonoBehaviour
 {
+    public Transform currentLadder;
+
     float gravity = 20.0f;      // Gravity
     float friction = 6;         // Ground friction
 
@@ -226,37 +228,86 @@ public class KzControls : MonoBehaviour
          * Direction player moves on the ladder depends on where camera is facing
          * speeds add up. ie. S+D while looking downwards away from ladder results in player climbing the ladder twice as fast
          * 
+         * 
+         * Movement towards the ladder --> player goes up. Away is down
+         * Other 2 keys move left/right on the ladder
+         * 
          */
 
-        //testing
-        playerVelocity.x = Input.GetAxisRaw("Horizontal") * 10;
-        playerVelocity.z = 0;
-        playerVelocity.y = Input.GetAxisRaw("Vertical") * 10;
+        // TODO;
+        // better movement
+        // vertical controls based on if player is looking up / down. Just get camera rotation?
+        // 
 
-        //Check if player is facing the ladder. >90 degrees away == !facingLadder
-        //Get correct ladder from collision check?
-        //Camera angle?
-        //Raycast likely wouldnt work that well unless player is required to directly look at the ladder? Not really desired result
-        bool facingLadder = false;
 
-        //??? Was W/S movement restricted only to vertical? It might have been just dependant on camera angle --> check / test what works out better
+        float ladderJump = 5f;       // Speed for ladder jumps
+        float ladderSpeed = 10f;     // multiplier for ladder speed
 
-        //Reverse vertical movement when facing away from ladder
-        if (facingLadder)
+        //Check if player is facing the ladder
+        bool facingLadder = true;
+
+
+
+
+
+        // X-axis. directly front = 0, Directly behind 180.
+
+
+        Vector3 targetDir = currentLadder.position - transform.position;
+        float angle = Vector3.Angle(targetDir, transform.forward);
+
+        print(angle);
+
+
+
+        // If player is facing towards ladder in angle smaller than x
+        //float angle = Vector3.Angle(transform.forward, currentLadder.position - transform.position);
+        /*
+        if (Mathf.Abs(angle) > 45)
         {
-            //playerVelocity.y = Input.GetAxisRaw("Vertical") * 10;
+            facingLadder = true;
+            print("facing ladder");
         }
         else
         {
-            //playerVelocity.y = Input.GetAxisRaw("Vertical") * -10;
+            facingLadder = false;
+            print("not facing ladder");
+        }
+        */
+
+
+        playerVelocity = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);        //input
+        playerVelocity = transform.TransformDirection(playerVelocity);                                  //direction
+        playerVelocity *= ladderSpeed;                                                                  //speed multiplier
+
+        //Reverse vertical movement when facing away from ladder
+        if (!facingLadder)
+        {
+            playerVelocity.y = -playerVelocity.y;
         }
 
-        // A/D movement angle depends on camera. ie. when facing ladder, player will move left / right accordingly. When facing 90 degrees to the left A/D movement will be down/up instead.
-        // Think of it as 2d sideview. A/D movement is Y rotation of camera +- 90 degrees.
+        //Jump
+        if (wishJump)
+        {
+            playerVelocity.y = 0;   // reset vertical velocity, optional
 
+            // Check direction ladder is facing
+            // Check which side player is on +-direction
 
+            
+            if (facingLadder)
+            {
+                playerVelocity = transform.TransformDirection(0, 0, -5);
+            }
+            else
+            {
+                playerVelocity = transform.TransformDirection(0, 0, 5);
+            }
+            
 
-        // Other option would be to make it similar to ground movement, but instead of Z axis, player would be able to move along Y axis. (unable to move away or towards the ladder, but able to go up / down instead)
+            //playerVelocity.z = -ladderJump;
+            //playerVelocity = transform.TransformDirection(0,0,5);       //-5 if facing the ladder? no y reset needed
+        }
     }
 
     private void SurfMove()
@@ -540,6 +591,7 @@ public class KzControls : MonoBehaviour
         if(collider.tag == "Ladder")
         {
             ladder = true;
+            currentLadder = collider.transform;     // get ladder
         }
 
     }
@@ -553,6 +605,14 @@ public class KzControls : MonoBehaviour
         if (collider.tag == "Ladder")
         {
             ladder = false;
+
+            // Reset horizontal movement so that player doesnt get launched off the ladder. Does interfere with ladder tricks. Limit maximum speed gained instead?
+            // Reason could also be how acceleration calculations work. TEST
+            if (!wishJump)
+            {
+                //playerVelocity.x = 0;
+                //playerVelocity.z = 0;
+            }
         }
 
     }
