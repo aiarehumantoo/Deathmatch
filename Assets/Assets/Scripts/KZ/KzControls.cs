@@ -17,7 +17,7 @@ struct Inputs
 
 public class KzControls : MonoBehaviour
 {
-    public Transform angletest; //test
+    //public Transform angletest; //test
     Transform currentLadder;
     Vector3 ladderPoint;
 
@@ -211,11 +211,12 @@ public class KzControls : MonoBehaviour
     void AngleTest()
     {
         //returns smaller angle between objects, 0-180 degrees
-        Vector3 targetDir = angletest.position - transform.position;
-        float angle = Vector3.Angle(targetDir, transform.forward);
+        //Vector3 targetDir = angletest.position - transform.position;
+        //float angle = Vector3.Angle(targetDir, transform.forward);
+
         //float angle = Vector3.Angle(transform.forward, angletest.position - transform.position);
 
-        print(angle);
+        //print(angle);
     }
 
     private void SetMovementDir()
@@ -251,15 +252,28 @@ public class KzControls : MonoBehaviour
 
         // TODO;
         // better movement, lock movement away from the ladder
-        // vertical controls based on if player is looking up / down. Just get camera rotation?
-        // fix angle calculations. single point instead of transform.position? (get closest point, current ladder)
+        // A+D movement
+        // bug where controls get permanently reversed?
 
 
         float ladderJump = 5f;       // Speed for ladder jumps
         float ladderSpeed = 10f;     // multiplier for ladder speed
 
         //Check if player is facing the ladder
-        bool facingLadder = true;
+        bool facingLadder;
+        bool lookingDown;
+
+
+        if (playerView.rotation.x > 0)    //camera.rotation.x  returns 0.7, 0, -0.7 (down, forward, up)
+        {
+            lookingDown = true;
+            //print("looking down");
+        }
+        else
+        {
+            lookingDown = false;
+            //print("looking up");
+        }
 
         // Calculate angle
         Vector3 targetDir = ladderPoint - transform.position;
@@ -270,20 +284,23 @@ public class KzControls : MonoBehaviour
         if (Mathf.Abs(angle) < 90)          //Mathf.Abs is unnecessary with current angle calculations. But leaving it in case left/right checks are needed in the future (-180, 0, 180)
         {
             facingLadder = true;
-            print("facing ladder");
+            //print("facing ladder");
         }
         else //Behind
         {
             facingLadder = false;
-            print("not facing ladder");
+            //print("not facing ladder");
         }
 
         playerVelocity = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);        //input
         playerVelocity = transform.TransformDirection(playerVelocity);                                  //direction
         playerVelocity *= ladderSpeed;                                                                  //speed multiplier
 
-        //Reverse vertical movement when facing away from ladder
-        if (!facingLadder)
+        if (!facingLadder && lookingDown)
+        {
+            playerVelocity.y = -playerVelocity.y;   //Reverse vertical movement when facing away from ladder + looking down
+        }
+        if (facingLadder && lookingDown)   //Looking towards the ladder + down
         {
             playerVelocity.y = -playerVelocity.y;
         }
