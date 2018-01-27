@@ -17,8 +17,9 @@ struct Inputs
 
 public class KzControls : MonoBehaviour
 {
-    public Transform angletest;
+    public Transform angletest; //test
     Transform currentLadder;
+    Vector3 ladderPoint;
 
     float gravity = 20.0f;      // Gravity
     float friction = 6;         // Ground friction
@@ -203,12 +204,18 @@ public class KzControls : MonoBehaviour
 
         #endregion  
 
-        //testing
-        //returns smaller angle between objects
+        //AngleTest();
+    }
+
+    // single point angle calculation test
+    void AngleTest()
+    {
+        //returns smaller angle between objects, 0-180 degrees
         Vector3 targetDir = angletest.position - transform.position;
         float angle = Vector3.Angle(targetDir, transform.forward);
+        //float angle = Vector3.Angle(transform.forward, angletest.position - transform.position);
 
-        print(angle);   // 0-180?
+        print(angle);
     }
 
     private void SetMovementDir()
@@ -243,9 +250,9 @@ public class KzControls : MonoBehaviour
          */
 
         // TODO;
-        // better movement
+        // better movement, lock movement away from the ladder
         // vertical controls based on if player is looking up / down. Just get camera rotation?
-        // 
+        // fix angle calculations. single point instead of transform.position? (get closest point, current ladder)
 
 
         float ladderJump = 5f;       // Speed for ladder jumps
@@ -254,35 +261,22 @@ public class KzControls : MonoBehaviour
         //Check if player is facing the ladder
         bool facingLadder = true;
 
+        // Calculate angle
+        Vector3 targetDir = ladderPoint - transform.position;
+        float angle = Vector3.Angle(targetDir, transform.forward);
+        //print(angle);
 
-
-
-
-        // X-axis. directly front = 0, Directly behind 180.
-
-
-        //Vector3 targetDir = currentLadder.position - transform.position;
-        //float angle = Vector3.Angle(targetDir, transform.forward);
-
-        //print(angle);   // 0-180?
-
-
-
-        // If player is facing towards ladder in angle smaller than x
-        //float angle = Vector3.Angle(transform.forward, currentLadder.position - transform.position);
-        /*
-        if (Mathf.Abs(angle) > 45)
+        //Ladder in front
+        if (Mathf.Abs(angle) < 90)          //Mathf.Abs is unnecessary with current angle calculations. But leaving it in case left/right checks are needed in the future (-180, 0, 180)
         {
             facingLadder = true;
             print("facing ladder");
         }
-        else
+        else //Behind
         {
             facingLadder = false;
             print("not facing ladder");
         }
-        */
-
 
         playerVelocity = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);        //input
         playerVelocity = transform.TransformDirection(playerVelocity);                                  //direction
@@ -294,15 +288,15 @@ public class KzControls : MonoBehaviour
             playerVelocity.y = -playerVelocity.y;
         }
 
-        //Jump
+        //Jump, directional jump vs always directly away from the ladder?
         if (wishJump)
         {
-            playerVelocity.y = 0;   // reset vertical velocity, optional
+            //playerVelocity.y = 0;   // reset vertical velocity, optional. Not needed with vector jump. Keep current vertical velocity with vector jump if reset is not desired
 
-            // Check direction ladder is facing
+            // Check direction ladder is facing (if going with "away" jump
             // Check which side player is on +-direction
 
-            
+            // currently player jumps based on where camera is looking
             if (facingLadder)
             {
                 playerVelocity = transform.TransformDirection(0, 0, -5);
@@ -311,10 +305,6 @@ public class KzControls : MonoBehaviour
             {
                 playerVelocity = transform.TransformDirection(0, 0, 5);
             }
-            
-
-            //playerVelocity.z = -ladderJump;
-            //playerVelocity = transform.TransformDirection(0,0,5);       //-5 if facing the ladder? no y reset needed
         }
     }
 
@@ -603,6 +593,16 @@ public class KzControls : MonoBehaviour
         }
 
     }
+
+    // Get closest point on collider (for angle calculations)
+    void OnTriggerStay(Collider collider)
+    {
+        if (collider.tag == "Ladder")
+        {
+            ladderPoint = collider.ClosestPoint(transform.position);
+        }
+    }
+
     void OnTriggerExit(Collider collider)
     {
         if (collider.tag == "Surf")
