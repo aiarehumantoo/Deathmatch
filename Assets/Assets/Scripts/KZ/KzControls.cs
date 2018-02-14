@@ -219,6 +219,21 @@ public class KzControls : MonoBehaviour
         //print(angle);
     }
 
+    void AlterGravity()
+    {
+        // Rotate player, camera, controls. ie. gravity to the side or up instead of normal.
+            //movement should work normally as long as its local vectors. (depending on player angle / rotation)
+            //gravity = force to "down" direction each tick
+            //camera controls must be rotated to match new gravity
+
+        // for world objects static + directional gravity in code?
+        // gravity --> .down instead of -Y
+
+        //TODO
+        // Remake player controls to not use world vectors. --> player up is always up, even if upside down
+        // or different set of controls for each position
+    }
+
     private void SetMovementDir()
     {
         _inputs.forwardMove = Input.GetAxisRaw("Vertical");
@@ -252,19 +267,24 @@ public class KzControls : MonoBehaviour
 
         // TODO;
         // better movement, lock movement away from the ladder
-        // A+D movement
-        // bug where controls get permanently reversed?
+        // A+D movement, move up/down if ladder is to the side
+            // Angle of 45-135 degrees. (0 is front, 180 is behind)
+            // Check which side ladder is to decide up/down key (a/d). (Current angle calculation is just 0-180 degrees regardless of the side)
+
+        // input bug seems gone. test more
+        // Overall messy code. Clean up once everything works
+
+        //print(Camera.main.transform.localEulerAngles.x -180);       // -90 to 90 degrees, but middle is 180/-180 instead of 0. Camera vertical rotation
+
 
 
         float ladderJump = 5f;       // Speed for ladder jumps
         float ladderSpeed = 10f;     // multiplier for ladder speed
 
-        //Check if player is facing the ladder
-        bool facingLadder;
-        bool lookingDown;
+        bool facingLadder;  //Check if player is facing the ladder
+        bool lookingDown;   // -||- down
 
-
-        if (playerView.rotation.x > 0)    //camera.rotation.x  returns 0.7, 0, -0.7 (down, forward, up)
+        if (playerView.localRotation.x > 0)    //camera.rotation.x  returns 0.7, 0, -0.7 (down, forward, up)
         {
             lookingDown = true;
             //print("looking down");
@@ -278,10 +298,11 @@ public class KzControls : MonoBehaviour
         // Calculate angle
         Vector3 targetDir = ladderPoint - transform.position;
         float angle = Vector3.Angle(targetDir, transform.forward);
-        //print(angle);
+        print(angle);
+        //print(Mathf.Abs(angle));
 
         //Ladder in front
-        if (Mathf.Abs(angle) < 90)          //Mathf.Abs is unnecessary with current angle calculations. But leaving it in case left/right checks are needed in the future (-180, 0, 180)
+        if (angle < 90)
         {
             facingLadder = true;
             //print("facing ladder");
