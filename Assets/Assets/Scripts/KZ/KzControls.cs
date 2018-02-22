@@ -131,6 +131,7 @@ public class KzControls : MonoBehaviour
 
         this.transform.rotation = Quaternion.Euler(0, rotY, 0); // Rotates the collider
         playerView.rotation = Quaternion.Euler(rotX, rotY, 0); // Rotates the camera
+        //playerView.rotation = Quaternion.Euler(-rotY, rotX, 90);
 
         #endregion
 

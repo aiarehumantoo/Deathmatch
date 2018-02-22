@@ -8,6 +8,7 @@ TagManager:
   - Terrain
   - Surf
   - Ladder
+  - GravityTest
   layers:
   - Default
   - TransparentFX

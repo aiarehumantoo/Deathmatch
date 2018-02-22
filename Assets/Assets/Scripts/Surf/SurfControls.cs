@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class SurfControls : MonoBehaviour
 {
+    // surf controls testing. not needed?
+
+
+
+
     float gravity = 20.0f;      // Gravity
     float friction = 6;         // Ground friction
 
