@@ -29,8 +29,6 @@ public class GravityTestPlayer : MonoBehaviour
     private float playerFriction = 0.0f;
 
     #region MouseControls
-    //Mouse controls
-    //**********************************************************************
 
     //Camera
     public Transform playerView;
@@ -45,12 +43,9 @@ public class GravityTestPlayer : MonoBehaviour
     private Vector3 playerVelocity = Vector3.zero;
     private float playerTopVelocity = 0.0f;
 
-    //**********************************************************************
     #endregion
 
     #region MovementVariables
-    //Variables for movement
-    //**********************************************************************
 
     float moveSpeed = 7.0f;                // Ground move speed
     float runAcceleration = 10.0f;         // Ground accel
@@ -63,7 +58,6 @@ public class GravityTestPlayer : MonoBehaviour
     float jumpSpeed = 8.0f;                // The speed at which the character's up axis gains when hitting jump
     float moveScale = 1.0f;
 
-    //**********************************************************************
     #endregion
 
 
@@ -86,8 +80,6 @@ public class GravityTestPlayer : MonoBehaviour
     {
 
         #region MouseControls
-        //Mouse controls
-        //**********************************************************************
 
         /* Ensure that the cursor is locked into the screen */
         if (Cursor.lockState != CursorLockMode.Locked)
@@ -112,12 +104,9 @@ public class GravityTestPlayer : MonoBehaviour
         this.transform.rotation = Quaternion.Euler(rotY, 0, rotation); // Rotates the collider
         playerView.rotation = Quaternion.Euler(-rotY, rotX, rotation); // Rotates the camera
 
-        //**********************************************************************
         #endregion
 
         #region Movement
-        //Player Movement
-        //**********************************************************************
 
         QueueJump();
 
@@ -137,7 +126,6 @@ public class GravityTestPlayer : MonoBehaviour
         // Set the camera's position to the transform
         playerView.position = new Vector3(transform.position.x, transform.position.y + playerViewYOffset, transform.position.z);
 
-        //**********************************************************************
         #endregion  
     }
 

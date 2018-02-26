@@ -22,8 +22,6 @@ public class SurfControls : MonoBehaviour
     bool surf = false;
 
     #region MouseControls
-    //Mouse controls
-    //**********************************************************************
 
     //Camera
     public Transform playerView;
@@ -38,12 +36,9 @@ public class SurfControls : MonoBehaviour
     private Vector3 playerVelocity = Vector3.zero;
     private float playerTopVelocity = 0.0f;
 
-    //**********************************************************************
     #endregion
 
     #region MovementVariables
-    //Variables for movement
-    //**********************************************************************
 
     float moveSpeed = 7.0f;                // Ground move speed
     float runAcceleration = 10.0f;         // Ground accel
@@ -55,8 +50,7 @@ public class SurfControls : MonoBehaviour
     float sideStrafeSpeed = 1.0f;          // What the max speed to generate when side strafing
     float jumpSpeed = 8.0f;                // The speed at which the character's up axis gains when hitting jump
     float moveScale = 1.0f;
-
-    //**********************************************************************
+    
     #endregion
 
 
@@ -105,8 +99,6 @@ public class SurfControls : MonoBehaviour
         #endregion
 
         #region Movement
-        //Player Movement
-        //**********************************************************************
 
         QueueJump();
 
@@ -133,7 +125,6 @@ public class SurfControls : MonoBehaviour
         // Set the camera's position to the transform
         playerView.position = new Vector3(transform.position.x, transform.position.y + playerViewYOffset, transform.position.z);
 
-        //**********************************************************************
         #endregion  
     }
 
