@@ -10,8 +10,8 @@ namespace Gravity
         //simpler transform move would probably be better? this one is copy of players gravity code
 
 
-        float gravity = 20.0f;      // Gravity
-        public bool normalGravity;
+        public float gravity = 20.0f;      // Gravity
+        bool normalGravity = true;
 
         private Vector3 objectVelocity = Vector3.zero;
         private CharacterController _controller;
@@ -27,19 +27,33 @@ namespace Gravity
         // Update is called once per frame
         void Update()
         {
-            // Apply gravity
-            if (normalGravity)
+            //not on the ground, apply gravity
+            if (!_controller.isGrounded)
             {
                 objectVelocity.y -= gravity * Time.deltaTime;
             }
             else
             {
                 objectVelocity.y = 0;
-                objectVelocity.x += gravity * Time.deltaTime;
             }
 
             // Move the controller
             _controller.Move(objectVelocity * Time.deltaTime);
         }
-    } 
+
+        /*
+        public void ChangeGravity()
+        {
+            if (normalGravity)
+            {
+                gravity = -20f;
+            }
+            else
+            {
+                gravity = 20f;
+            }
+            normalGravity = !normalGravity;
+        }
+        */
+    }   
 }

@@ -14,9 +14,22 @@ public class RotatedControls : MonoBehaviour
     //add gravity, movement
     //altering gravity, camera/player turn, change controls
 
-    // single axis camera controls work, but using both axis at the same time results in weird mouse controls?
+    // camera rotated 90 degrees to the side works in weird ways. Swapping axis works fine, but only within certain angle.
+
+
+
+    // TODO;
+    //character controllers ground check does not work with reversed gravity since ground is "above"
+
+
 
     private CharacterController _controller;
+
+    float gravity = 20.0f;      // Gravity
+    //float rotation = 0;     // player / view rotation, testing
+    bool upsideDown = false;
+
+    private bool wishJump = false;
 
     #region MouseControls
 
@@ -32,6 +45,21 @@ public class RotatedControls : MonoBehaviour
     private Vector3 moveDirectionNorm = Vector3.zero;
     private Vector3 playerVelocity = Vector3.zero;
     private float playerTopVelocity = 0.0f;
+
+    #endregion
+
+    #region MovementVariables
+
+    float moveSpeed = 7.0f;                // Ground move speed
+    float runAcceleration = 10.0f;         // Ground accel
+    float runDeacceleration = 6.0f;       // Deacceleration that occurs when running on the ground
+    float airAcceleration = 0.1f;          // Air accel
+    float airDecceleration = 0.1f;         // Deacceleration experienced when ooposite strafing
+    float airControl = 0.3f;               // How precise air control is
+    float sideStrafeAcceleration = 100.0f;  // How fast acceleration occurs to get up to sideStrafeSpeed when
+    float sideStrafeSpeed = 1.0f;          // What the max speed to generate when side strafing
+    float jumpSpeed = 8.0f;                // The speed at which the character's up axis gains when hitting jump
+    float moveScale = 1.0f;
 
     #endregion
 
@@ -69,19 +97,80 @@ public class RotatedControls : MonoBehaviour
         else if (rotX > 90)
             rotX = 90;
 
-        //this.transform.rotation = Quaternion.Euler(0, rotY, rotation); // Rotates the collider
-        //playerView.rotation = Quaternion.Euler(rotX, rotY, rotation); // Rotates the camera
-
-        this.transform.rotation = Quaternion.Euler(rotY, 0, 90); // Rotates the collider
-        playerView.rotation = Quaternion.Euler(-rotY, rotX, 90); // Rotates the camera
+        //Alter mouse controls
+        if (!upsideDown)
+        {
+            this.transform.rotation = Quaternion.Euler(0, rotY, 0); // Rotates the collider
+            playerView.rotation = Quaternion.Euler(rotX, rotY, 0); // Rotates the camera
+        }
+        else
+        {
+            this.transform.rotation = Quaternion.Euler(0, rotY, 180); // Rotates the collider
+            playerView.rotation = Quaternion.Euler(-rotX, -rotY, 180); // Rotates the camera
+        }
 
         #endregion
 
-        Move();
+        QueueJump();
+
+        if (_controller.isGrounded)
+        {
+            GroundMove();
+        }
+        else if (!_controller.isGrounded)
+        {
+            AirMove();
+        }
+
+        // Move the controller
+        _controller.Move(playerVelocity * Time.deltaTime);
+
+        //Need to move the camera after the player has been moved because otherwise the camera will clip the player if going fast enough and will always be 1 frame behind.
+        // Set the camera's position to the transform
+        playerView.position = new Vector3(transform.position.x, transform.position.y + playerViewYOffset, transform.position.z);
     }
 
-    private void Move()
+    private void QueueJump()
     {
-        // Simple player movement
+        if (Input.GetButtonDown("Jump") && !wishJump)
+        {
+            wishJump = true;
+        }
+        if (Input.GetButtonUp("Jump"))
+        {
+            wishJump = false;
+        }
+    }
+
+    private void GroundMove()
+    {
+        //Simple ground movement for testing
+        playerVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));        //input
+        playerVelocity = transform.TransformDirection(playerVelocity);                                  //direction
+        playerVelocity *= moveSpeed;                                                                    //speed multiplier
+
+        // Reset the gravity velocity
+        playerVelocity.y = 0;
+
+        if (wishJump)
+        {
+            playerVelocity.y = jumpSpeed;
+            wishJump = false;
+        }
+    }
+
+    private void AirMove()
+    {
+
+        //gravity
+        playerVelocity.y -= gravity * Time.deltaTime;
+    }
+
+    public void ChangeGravity()
+    {
+        //Change camera rotation / player gravity
+        gravity = -gravity;
+        upsideDown = !upsideDown;
+        playerViewYOffset = -playerViewYOffset;
     }
 }
