@@ -19,7 +19,8 @@ public class RotatedControls : MonoBehaviour
 
 
     // TODO;
-    //character controllers ground check does not work with reversed gravity since ground is "above"
+    // character controllers ground check does not work with reversed gravity since ground is "above"
+    // camera "animation"
 
 
 
@@ -161,7 +162,6 @@ public class RotatedControls : MonoBehaviour
 
     private void AirMove()
     {
-
         //gravity
         playerVelocity.y -= gravity * Time.deltaTime;
     }

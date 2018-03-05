@@ -318,7 +318,6 @@
     <Compile Include="Assets\Assets\Scripts\Enemies\EnemySpawner.cs" />
     <Compile Include="Assets\Assets\Scripts\FPS.cs" />
     <Compile Include="Assets\Assets\Scripts\GravityObjectTest.cs" />
-    <Compile Include="Assets\Assets\Scripts\GravityTestPlayer.cs" />
     <Compile Include="Assets\Assets\Scripts\GravityTestTrigger.cs" />
     <Compile Include="Assets\Assets\Scripts\KZ\Debugger.cs" />
     <Compile Include="Assets\Assets\Scripts\KZ\KzControls.cs" />
@@ -331,7 +330,6 @@
     <Compile Include="Assets\Assets\Scripts\Runner\Player\SpawnPlayer.cs" />
     <Compile Include="Assets\Assets\Scripts\Settings.cs" />
     <Compile Include="Assets\Assets\Scripts\SimpleMove.cs" />
-    <Compile Include="Assets\Assets\Scripts\Surf\SurfControls.cs" />
     <Compile Include="Assets\Assets\Scripts\Test2.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\CameraControls.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\IcoBumpin.cs" />

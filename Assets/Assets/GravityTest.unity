@@ -10667,7 +10667,6 @@ GameObject:
   - component: {fileID: 1863769808}
   - component: {fileID: 1863769807}
   - component: {fileID: 1863769813}
-  - component: {fileID: 1863769806}
   - component: {fileID: 1863769805}
   - component: {fileID: 1863769804}
   m_Layer: 0
@@ -10710,21 +10709,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d43b6cb855716974586c19b7a42af3ab, type: 3}
   m_LandingSounds: []
   m_FootStepSounds: []
-  playerView: {fileID: 795105817}
-  playerViewYOffset: 0.6
-  xMouseSensitivity: 30
-  yMouseSensitivity: 30
---- !u!114 &1863769806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1863769803}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d83b17987b114f4d964fef75f3074f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   playerView: {fileID: 795105817}
   playerViewYOffset: 0.6
   xMouseSensitivity: 30

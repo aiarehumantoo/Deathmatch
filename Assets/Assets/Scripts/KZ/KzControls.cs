@@ -352,6 +352,16 @@ public class KzControls : MonoBehaviour
         //gravity + air control + slide
         //forward velocity -= velocity.y. Convert vertical velocity into forward acceleration. Down for accel, up for deaccel.
         //Enable surfing only on correct faces. Simple touch check is not enough.
+
+        // Surf controls. Sliding + gravity + ramp = vertical speed --> horizontal speed.
+        // Similar to air controls. !direction (backwards. or forward after turning 180) reduces speed, control with a/d + mouse
+        //controls slightly adjust speed / direction
+
+        // Normal aircontrols with 0 gravity is otherwise ok but bit bouncy.
+        // Make smoother, increase speed?
+        // Sliding down the surf ramp without user input
+        // Gaining speed when going downwards
+        // Losing speed when going upwards
     }
 
     private void GroundMove()
