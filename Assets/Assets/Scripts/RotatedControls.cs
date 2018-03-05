@@ -98,7 +98,7 @@ public class RotatedControls : MonoBehaviour
         else if (rotX > 90)
             rotX = 90;
 
-        //Alter mouse controls
+        //Alter mouse controls. reverse gravity test
         if (!upsideDown)
         {
             this.transform.rotation = Quaternion.Euler(0, rotY, 0); // Rotates the collider

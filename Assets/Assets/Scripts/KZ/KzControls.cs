@@ -30,9 +30,10 @@ public class KzControls : MonoBehaviour
     // Used to display real time friction values
     private float playerFriction = 0.0f;
 
-    bool surf = false;      // Surf controls
+    bool surf = false;      // Enable surf controls
     bool ladder = false;    // Ladder
 
+    #region
     // An array of sounds that will be randomly selected from
     public AudioClip[] m_PlaySounds;        // Used to play sounds
     public AudioClip[] m_JumpSounds;
@@ -41,6 +42,7 @@ public class KzControls : MonoBehaviour
     private AudioSource m_AudioSource;
     float audioTimer;       //Timer for footsteps
     float timeBetweenFootSteps = 0.3f;
+    #endregion
 
     // Player commands
     private Inputs _inputs;
@@ -81,14 +83,12 @@ public class KzControls : MonoBehaviour
     #endregion
 
     #region DoubleJumpVariables
-    //Variables for doublejump. Second jump within 400ms is higher
-    //**********************************************************************
+    //Variables for doublejump. Second jump within is higher, expires after short period
 
     float timer = 1.0f;                             // Timer.
     float doubleJumpWindow = 0.6f;                  // How long player has time to perform second,  higher jump.
     float doubleJumpSpeed = 15.0f;
 
-    //**********************************************************************
     #endregion
 
     private CharacterController _controller;
@@ -131,7 +131,6 @@ public class KzControls : MonoBehaviour
 
         this.transform.rotation = Quaternion.Euler(0, rotY, 0); // Rotates the collider
         playerView.rotation = Quaternion.Euler(rotX, rotY, 0); // Rotates the camera
-        //playerView.rotation = Quaternion.Euler(-rotY, rotX, 90);
 
         #endregion
 
@@ -222,17 +221,10 @@ public class KzControls : MonoBehaviour
 
     void AlterGravity()
     {
-        // Rotate player, camera, controls. ie. gravity to the side or up instead of normal.
-            //movement should work normally as long as its local vectors. (depending on player angle / rotation)
-            //gravity = force to "down" direction each tick
-            //camera controls must be rotated to match new gravity
+        //***For test scene see GravityTest (assets folder)***
 
-        // for world objects static + directional gravity in code?
-        // gravity --> .down instead of -Y
 
-        //TODO
-        // Remake player controls to not use world vectors. --> player up is always up, even if upside down
-        // or different set of controls for each position
+        // Remake player controls to not use world vectors. --> player up is always up, even if upside down???
     }
 
     private void SetMovementDir()
@@ -260,17 +252,12 @@ public class KzControls : MonoBehaviour
          * Direction player moves on the ladder depends on where camera is facing
          * speeds add up. ie. S+D while looking downwards away from ladder results in player climbing the ladder twice as fast
          * 
-         * 
-         * Movement towards the ladder --> player goes up. Away is down
-         * Other 2 keys move left/right on the ladder
-         * 
          */
 
         // TODO;
-        // better movement, lock movement away from the ladder
+        // better movement, prevent player moving away from ladder (movement keys)
         // A+D movement, move up/down if ladder is to the side
-            // Angle of 45-135 degrees. (0 is front, 180 is behind)
-            // Check which side ladder is to decide up/down key (a/d). (Current angle calculation is just 0-180 degrees regardless of the side)
+        // W+S moving forward/backward if ladder is to the side
 
         // input bug seems gone. test more
         // Overall messy code. Clean up once everything works
@@ -330,12 +317,7 @@ public class KzControls : MonoBehaviour
         //Jump, directional jump vs always directly away from the ladder?
         if (wishJump)
         {
-            //playerVelocity.y = 0;   // reset vertical velocity, optional. Not needed with vector jump. Keep current vertical velocity with vector jump if reset is not desired
-
-            // Check direction ladder is facing (if going with "away" jump
-            // Check which side player is on +-direction
-
-            // currently player jumps based on where camera is looking
+            // player jumps based on where camera is looking
             if (facingLadder)
             {
                 playerVelocity = transform.TransformDirection(0, 0, -5);
@@ -349,24 +331,19 @@ public class KzControls : MonoBehaviour
 
     private void SurfMove()
     {
+        //TODO
+        // Better surf ramp detection, not just touch
+
         //gravity + air control + slide
-        //forward velocity -= velocity.y. Convert vertical velocity into forward acceleration. Down for accel, up for deaccel.
+        //Convert vertical velocity into forward acceleration. Down for accel, up for deaccel.
         //Enable surfing only on correct faces. Simple touch check is not enough.
 
-        // Surf controls. Sliding + gravity + ramp = vertical speed --> horizontal speed.
-        // Similar to air controls. !direction (backwards. or forward after turning 180) reduces speed, control with a/d + mouse
-        //controls slightly adjust speed / direction
-
-        // Normal aircontrols with 0 gravity is otherwise ok but bit bouncy.
-        // Make smoother, increase speed?
-        // Sliding down the surf ramp without user input
-        // Gaining speed when going downwards
-        // Losing speed when going upwards
+        // modified aircontrols with surf ramp acceleration?
     }
 
     private void GroundMove()
     {
-        //TODO; remake for snappier controls.
+        //TODO; remake or tweak for snappier controls.
 
         Vector3 wishdir;
 
@@ -621,11 +598,6 @@ public class KzControls : MonoBehaviour
     #endregion
 
 
-
-
-
-
-    // Enable/disable surfing                       TODO; top surface only
     void OnTriggerEnter(Collider collider)
     {
         //Debug.Log("Test");
