@@ -33,7 +33,7 @@ public class KzControls : MonoBehaviour
     bool surf = false;      // Enable surf controls
     bool ladder = false;    // Ladder
 
-    #region
+    #region Audio
     // An array of sounds that will be randomly selected from
     public AudioClip[] m_PlaySounds;        // Used to play sounds
     public AudioClip[] m_JumpSounds;
