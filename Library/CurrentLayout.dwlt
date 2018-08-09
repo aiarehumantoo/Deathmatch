@@ -410,18 +410,18 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Assets/Scripts/KZ
+    - Assets/Assets
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Assets/Scripts/KZ
+  - Assets/Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Program Files\Unity projects\Deathmatch
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 5a2d0000
-    m_LastClickedID: 11610
+    m_SelectedIDs: e82b0000
+    m_LastClickedID: 11240
     m_ExpandedIDs: 000000000a29000016290000342900005e29000066290000a0290000fe290000582a0000062b0000742b0000c02b0000e82b0000162d0000002e0000342e00003e2e00006e450000884500009a4500007e46000078470000924700000248000020480000304800004a48000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -568,9 +568,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 5a2d0000
+    m_SelectedIDs: 182e0000
     m_LastClickedID: 0
-    m_ExpandedIDs: 9efbffff00000000
+    m_ExpandedIDs: e077fcffbab4ffffecbaffff6ac4ffff9efbffff0000000094530000b4530000c65400006c560000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -626,9 +626,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 7.251691, y: 24.507582, z: 2.9615803}
+    m_Target: {x: 4.939616, y: 2.766881, z: 10.381996}
     speed: 2
-    m_Value: {x: 7.251691, y: 24.507582, z: 2.9615803}
+    m_Value: {x: 4.939616, y: 2.766881, z: 10.381996}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -652,13 +652,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.045422878, y: -0.25826746, z: 0.012153682, w: -0.9649285}
+    m_Target: {x: -0.12732698, y: 0.33180115, z: -0.045256495, w: -0.93362075}
     speed: 2
-    m_Value: {x: -0.045422878, y: -0.25826746, z: 0.012153682, w: -0.96492845}
+    m_Value: {x: -0.12732698, y: 0.33180115, z: -0.045256495, w: -0.93362075}
   m_Size:
-    m_Target: 24.627218
+    m_Target: 56.83618
     speed: 2
-    m_Value: 24.627218
+    m_Value: 56.83618
   m_Ortho:
     m_Target: 0
     speed: 2
