@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2017
+# Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deathmatch", "Deathmatch.csproj", "{4E3AD83E-466D-82D9-A7B5-901E835E2AAC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deathmatch.Plugins", "Deathmatch.Plugins.csproj", "{C3D7CFB3-8941-E59C-60C4-ACC86EE6AA9F}"
